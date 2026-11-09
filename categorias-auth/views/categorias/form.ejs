@@ -1,0 +1,21 @@
+<%- include('../partials/head') %>
+<section class="tarjeta estrecha">
+  <h1><%= titulo %></h1>
+  <form method="post" action="<%= accion %>" novalidate>
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+    <label for="nombre">Nombre</label>
+    <input id="nombre" name="nombre" type="text" maxlength="50" value="<%= valores.nombre || '' %>" required>
+    <% if (errores.nombre) { %><p class="error"><%= errores.nombre %></p><% } %>
+
+    <label for="descripcion">Descripción (opcional)</label>
+    <textarea id="descripcion" name="descripcion" rows="3" maxlength="200"><%= valores.descripcion || '' %></textarea>
+    <% if (errores.descripcion) { %><p class="error"><%= errores.descripcion %></p><% } %>
+
+    <div class="fila">
+      <button class="btn" type="submit">Guardar</button>
+      <a href="/categorias">Cancelar</a>
+    </div>
+  </form>
+</section>
+<%- include('../partials/foot') %>

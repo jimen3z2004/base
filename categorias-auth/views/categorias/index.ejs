@@ -1,0 +1,31 @@
+<%- include('../partials/head', { titulo: 'Categorías' }) %>
+<div class="encabezado">
+  <h1>Categorías</h1>
+  <a class="btn" href="/categorias/nueva">Nueva categoría</a>
+</div>
+<% if (categorias.length === 0) { %>
+  <p class="vacio">Aún no tienes categorías. Crea la primera con «Nueva categoría».</p>
+<% } else { %>
+  <div class="tabla-scroll">
+  <table>
+    <thead><tr><th>Nombre</th><th>Descripción</th><th>Creada</th><th><span class="oculto">Acciones</span></th></tr></thead>
+    <tbody>
+      <% categorias.forEach(c => { %>
+      <tr>
+        <td><%= c.nombre %></td>
+        <td><%= c.descripcion || '—' %></td>
+        <td><%= c.creado_en.slice(0, 10) %></td>
+        <td class="acciones">
+          <a href="/categorias/<%= c.id %>/editar">Editar</a>
+          <form method="post" action="/categorias/<%= c.id %>/eliminar" class="en-linea" data-confirmar="¿Eliminar la categoría «<%= c.nombre %>»?">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <button class="btn-texto peligro" type="submit">Eliminar</button>
+          </form>
+        </td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+  </div>
+<% } %>
+<%- include('../partials/foot') %>

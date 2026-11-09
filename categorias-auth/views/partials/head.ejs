@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= typeof titulo !== 'undefined' ? titulo + ' · ' : '' %>Mis categorías</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<header class="barra">
+  <a class="marca" href="/">Mis categorías</a>
+  <nav>
+    <% if (usuario) { %>
+      <span class="saludo"><%= usuario.nombre %></span>
+      <form method="post" action="/logout" class="en-linea">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <button class="btn btn-linea" type="submit">Cerrar sesión</button>
+      </form>
+    <% } else { %>
+      <a href="/login">Iniciar sesión</a>
+      <a href="/registro">Crear cuenta</a>
+    <% } %>
+  </nav>
+</header>
+<main>
+<% if (flash) { %>
+  <p class="aviso aviso-<%= flash.tipo %>" role="status"><%= flash.texto %></p>
+<% } %>

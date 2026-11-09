@@ -1,0 +1,28 @@
+<%- include('partials/head', { titulo: 'Crear cuenta' }) %>
+<section class="tarjeta estrecha">
+  <h1>Crear cuenta</h1>
+  <form method="post" action="/registro" novalidate>
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+    <label for="nombre">Nombre</label>
+    <input id="nombre" name="nombre" type="text" maxlength="60" autocomplete="name" value="<%= valores.nombre || '' %>" required>
+    <% if (errores.nombre) { %><p class="error"><%= errores.nombre %></p><% } %>
+
+    <label for="email">Correo electrónico</label>
+    <input id="email" name="email" type="email" maxlength="120" autocomplete="email" value="<%= valores.email || '' %>" required>
+    <% if (errores.email) { %><p class="error"><%= errores.email %></p><% } %>
+
+    <label for="password">Contraseña</label>
+    <input id="password" name="password" type="password" maxlength="72" autocomplete="new-password" required>
+    <p class="ayuda">Mínimo 8 caracteres, con al menos una letra y un número.</p>
+    <% if (errores.password) { %><p class="error"><%= errores.password %></p><% } %>
+
+    <label for="confirmar">Confirmar contraseña</label>
+    <input id="confirmar" name="confirmar" type="password" maxlength="72" autocomplete="new-password" required>
+    <% if (errores.confirmar) { %><p class="error"><%= errores.confirmar %></p><% } %>
+
+    <button class="btn" type="submit">Crear cuenta</button>
+  </form>
+  <p class="pie-form">¿Ya tienes cuenta? <a href="/login">Inicia sesión</a></p>
+</section>
+<%- include('partials/foot') %>
